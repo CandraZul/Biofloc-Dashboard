@@ -1,0 +1,132 @@
+/* components/Dashboard.css - Elegant Version */
+.dashboard {
+  animation: fadeIn 0.5s ease;
+}
+
+.dashboard h2 {
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+}
+
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 24px;
+  padding: 24px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  transform: rotate(45deg);
+  transition: transform 0.5s;
+}
+
+.stat-card:hover::before {
+  transform: rotate(45deg) scale(1.2);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-icon {
+  font-size: 3rem;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-info h3 {
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-values {
+  font-size: 0.9rem;
+}
+
+.stat-values div {
+  margin-bottom: 5px;
+}
+
+.stat-values strong {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.chart-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.chart-card h3 {
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+  .charts-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stat-card {
+    padding: 18px;
+  }
+  
+  .stat-icon {
+    font-size: 2rem;
+  }
+  
+  .chart-card {
+    padding: 18px;
+  }
+}

@@ -1,0 +1,248 @@
+/* components/DataAnalysis.css - Elegant Version */
+.data-analysis {
+  animation: fadeIn 0.5s ease;
+}
+
+.data-analysis h2 {
+  margin-bottom: 24px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+}
+
+.analysis-controls {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 20px;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.control-group label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.control-group select {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.control-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.educational-section {
+  margin-bottom: 40px;
+}
+
+.educational-section h3 {
+  margin-bottom: 20px;
+  color: #667eea;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.learning-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.learning-card {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  border-radius: 24px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.learning-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.learning-card h4 {
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.learning-card ul {
+  margin-left: 20px;
+}
+
+.learning-card li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.analysis-section {
+  margin-bottom: 40px;
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.analysis-section h3 {
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.radar-container {
+  margin: 20px 0;
+  min-height: 400px;
+}
+
+.trend-indicators {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.trend-item {
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.trend-item.positive {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+}
+
+.trend-item.negative {
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+}
+
+.insights-section {
+  margin-bottom: 40px;
+}
+
+.insights-section h3 {
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.insight-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.insight-card {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 24px;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s ease;
+}
+
+.insight-card:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.insight-card.recommendation {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border-left-color: #ffc107;
+}
+
+.insight-card h4 {
+  margin-bottom: 12px;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.exercise-section {
+  margin-top: 40px;
+}
+
+.exercise-card {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  border-radius: 24px;
+  padding: 28px;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.exercise-card h4 {
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.exercise-card ol {
+  margin-left: 20px;
+  margin-bottom: 24px;
+}
+
+.exercise-card li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.btn-exercise {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-exercise:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+@media (max-width: 768px) {
+  .analysis-controls {
+    padding: 15px;
+  }
+  
+  .learning-card, .insight-card, .exercise-card {
+    padding: 18px;
+  }
+  
+  .trend-item {
+    padding: 8px 14px;
+    font-size: 0.75rem;
+  }
+  
+  .btn-exercise {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}
