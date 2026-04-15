@@ -11,29 +11,63 @@ const DataAnalysis = ({ historicalData }) => {
   const [selectedPeriod, setSelectedPeriod] = useState('week');
   const [selectedParameter, setSelectedParameter] = useState('all');
 
-  const getFilteredData = () => {
-    const now = Date.now();
-    let daysToShow = 7;
-    if (selectedPeriod === 'month') daysToShow = 30;
-    if (selectedPeriod === 'week') daysToShow = 7;
-    
-    const cutoff = now - (daysToShow * 24 * 60 * 60 * 1000);
-    return historicalData.filter(d => d.timestamp > cutoff);
+  const flattenData = (readings) => {
+    if (!readings) return [];
+
+    return Object.entries(readings).flatMap(([date, timestamps]) =>
+      Object.entries(timestamps).map(([ts, values]) => ({
+        timestamp: Number(ts) * 1000,
+        ...values
+      }))
+    );
   };
 
-  const filteredData = getFilteredData();
+  const isValidData = (d) => {
+    return (
+      d &&
+      d.timestamp &&
+      d.temperature !== -127 &&
+      d.turbidity !== 1000 &&
+      d.oxygen !== 0 &&
+      d.ph !== 0
+    );
+  };
+
+  const getFilteredData = (data) => {
+    const now = Date.now();
+    const daysToShow = selectedPeriod === 'month' ? 30 : 7;
+    const cutoff = now - (daysToShow * 24 * 60 * 60 * 1000);
+
+    return data.filter(d => d.timestamp > cutoff);
+  };
+
+  const rawData = flattenData(historicalData?.readings);
+
+  const cleanedData = rawData.filter(isValidData);
+
+  const filteredData = getFilteredData(cleanedData);
+
+  const safeNumber = (val, def = 0) => {
+    const n = parseFloat(val);
+    return isNaN(n) ? def : n;
+  };
 
   // Prepare data for radar chart (water quality index)
   const getLatestValues = () => {
-    if (filteredData.length === 0) return [];
+    if (!filteredData.length) return [];
+
     const latest = filteredData[filteredData.length - 1];
-    return [
-      { parameter: 'DO', value: (parseFloat(latest.oxygen) / 8) * 100, fullMark: 100 },
-      { parameter: 'pH', value: (parseFloat(latest.ph) / 9) * 100, fullMark: 100 },
-      { parameter: 'Temperature', value: (parseFloat(latest.temperature) / 35) * 100, fullMark: 100 },
-      { parameter: 'Turbidity', value: 100 - (latest.turbidity / 1000) * 100, fullMark: 100 },
-      { parameter: 'Ammonia', value: 100 - (parseFloat(latest.ammonia) / 2) * 100, fullMark: 100 }
+
+    const data = [
+      { parameter: 'DO', value: (safeNumber(latest.oxygen) / 8) * 100 },
+      { parameter: 'pH', value: (safeNumber(latest.ph) / 9) * 100 },
+      { parameter: 'Temperature', value: (safeNumber(latest.temperature) / 35) * 100 },
+      { parameter: 'Turbidity', value: 100 - (safeNumber(latest.turbidity) / 1000) * 100 },
+      { parameter: 'Ammonia', value: 0 } // sementara 0 karena tidak ada di data
     ];
+
+    // 🔥 FILTER yang bikin error
+    return data.filter(d => !isNaN(d.value) && d.value !== null);
   };
 
   // Calculate trend analysis
@@ -69,6 +103,11 @@ const DataAnalysis = ({ historicalData }) => {
   };
 
   const insights = getEducationalInsights();
+
+  const radarData = getLatestValues();
+
+  console.log('filteredData:', filteredData);
+console.log('radarData:', radarData);
 
   return (
     <div className="data-analysis">
@@ -109,15 +148,19 @@ const DataAnalysis = ({ historicalData }) => {
       <div className="analysis-section">
         <h3>⭐ Indeks Kualitas Air</h3>
         <div className="radar-container">
+          {radarData.length > 0 ? (
           <ResponsiveContainer width="100%" height={400}>
-            <RadarChart data={getLatestValues()}>
+            <RadarChart data={radarData}>
               <PolarGrid />
               <PolarAngleAxis dataKey="parameter" />
               <PolarRadiusAxis angle={30} domain={[0, 100]} />
-              <Radar name="Kualitas Air" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+              <Radar dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
               <Tooltip />
             </RadarChart>
           </ResponsiveContainer>
+        ) : (
+          <div>⚠️ Data tidak cukup untuk Radar Chart</div>
+        )}
         </div>
       </div>
 

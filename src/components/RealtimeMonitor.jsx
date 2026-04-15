@@ -10,7 +10,8 @@ const RealtimeMonitor = ({ sensorData }) => {
     ph = 0,
     temperature = 0,
     turbidity = 0,
-    ammonia = 0
+    ammonia = 0,
+    timestamp = 0
   } = sensorData || {};
   const parameters = [
     {
@@ -75,14 +76,25 @@ const RealtimeMonitor = ({ sensorData }) => {
     }
   };
 
+  const isOnline = () => {
+    if (!timestamp) return false;
+
+    const now = Date.now();
+    const lastUpdate = new Date(timestamp).getTime(); // pastikan timestamp valid
+
+    return (now - lastUpdate) <= 5000; // 5 detik
+  };
+
+  const online = isOnline();
+
   return (
     <div className="realtime-monitor">
       <div className="monitor-header">
         <h2>📡 Real-time Monitoring</h2>
-        <div className="live-badge">
-          <span className="pulse"></span>
-          LIVE
-        </div>
+          <div className={`live-badge ${online ? 'online' : 'offline'}`}>
+            <span className="pulse"></span>
+            {online ? 'LIVE' : 'OFFLINE'}
+          </div>
       </div>
       
       <div className="sensors-grid">

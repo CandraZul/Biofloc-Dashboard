@@ -2,8 +2,18 @@
 import React, { useState } from 'react';
 import './CalibrationPanel.css';
 
+
+
 const CalibrationPanel = ({ calibration, setCalibration }) => {
-  const [newCalibration, setNewCalibration] = useState(calibration);
+  const defaultCalibration = {
+    oxygen_calibration: 875,
+    ph4: 2.6,
+    ph7: 2.1
+  };
+
+  const [newCalibration, setNewCalibration] = useState(
+    calibration || defaultCalibration
+  );
   const [message, setMessage] = useState('');
 
   const handleCalibrationChange = (param, value) => {

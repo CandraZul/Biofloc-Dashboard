@@ -18,6 +18,7 @@
   font-weight: 700;
 }
 
+/* default = ONLINE (punya kamu, tidak diubah) */
 .live-badge {
   background: linear-gradient(135deg, #ff6b6b, #ee5a24);
   color: white;
@@ -32,21 +33,27 @@
   animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 4px 15px rgba(238, 90, 36, 0.3);
-  }
-  50% {
-    box-shadow: 0 4px 25px rgba(238, 90, 36, 0.6);
-  }
+/* 🔴 OFFLINE STATE */
+.live-badge.offline {
+  background: linear-gradient(135deg, #7f8c8d, #95a5a6);
+  box-shadow: 0 4px 10px rgba(127, 140, 141, 0.3);
+  animation: none; /* matikan pulse */
+  opacity: 0.8;
 }
 
+/* titik kecil */
 .pulse {
   width: 8px;
   height: 8px;
   background: white;
   border-radius: 50%;
   animation: ripple 1.5s infinite;
+}
+
+/* OFFLINE → matikan ripple */
+.live-badge.offline .pulse {
+  animation: none;
+  opacity: 0.5;
 }
 
 @keyframes ripple {
