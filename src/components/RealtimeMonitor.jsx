@@ -5,17 +5,17 @@ import { FaTint, FaTemperatureHigh, FaWater, FaExclamationTriangle } from "react
 import { GiChemicalDrop } from "react-icons/gi";
 
 
-const [now, setNow] = useState(Date.now());
-
-useEffect(() => {
-  const interval = setInterval(() => {
-    setNow(Date.now());
-  }, 1000);
-
-  return () => clearInterval(interval);
-}, []);
-
 const RealtimeMonitor = ({ sensorData }) => {
+  const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(Date.now());
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const {
     oxygen = 0,
     ph = 0,
@@ -90,7 +90,6 @@ const RealtimeMonitor = ({ sensorData }) => {
   const isOnline = () => {
     if (!timestamp) return false;
 
-    const now = Date.now();
     const lastUpdate = new Date(timestamp * 1000).getTime(); // pastikan timestamp valid
 
     return (now - lastUpdate) <= 10000; // 5 detik
