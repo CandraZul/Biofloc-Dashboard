@@ -1,8 +1,9 @@
 // components/RealtimeMonitor.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './RealtimeMonitor.css';
 import { FaTint, FaTemperatureHigh, FaWater, FaExclamationTriangle } from "react-icons/fa";
 import { GiChemicalDrop } from "react-icons/gi";
+
 
 const [now, setNow] = useState(Date.now());
 
