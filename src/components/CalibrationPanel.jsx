@@ -41,7 +41,7 @@ const CalibrationPanel = ({ calibration, setCalibration }) => {
 
   return (
     <div className="calibration-panel">
-      <h2>🔧 Kalibrasi Sensor</h2>
+      <h2>Kalibrasi Sensor</h2>
       <p className="calibration-desc">
         Lakukan kalibrasi sensor secara berkala untuk memastikan akurasi data
       </p>

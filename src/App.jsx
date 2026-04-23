@@ -97,25 +97,25 @@ function App() {
           className={activeTab === 'realtime' ? 'active' : ''} 
           onClick={() => setActiveTab('realtime')}
         >
-          📊 Realtime Monitor
+          Realtime Monitor
         </button>
         <button 
           className={activeTab === 'dashboard' ? 'active' : ''} 
           onClick={() => setActiveTab('dashboard')}
         >
-          📈 Dashboard
+          Dashboard
         </button>
         <button 
           className={activeTab === 'calibration' ? 'active' : ''} 
           onClick={() => setActiveTab('calibration')}
         >
-          🔧 Kalibrasi
+          Kalibrasi
         </button>
         <button 
           className={activeTab === 'analysis' ? 'active' : ''} 
           onClick={() => setActiveTab('analysis')}
         >
-          📚 Analisis Data
+          Analisis Data
         </button>
       </nav>
 

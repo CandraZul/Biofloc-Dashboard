@@ -4,6 +4,16 @@ import './RealtimeMonitor.css';
 import { FaTint, FaTemperatureHigh, FaWater, FaExclamationTriangle } from "react-icons/fa";
 import { GiChemicalDrop } from "react-icons/gi";
 
+const [now, setNow] = useState(Date.now());
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setNow(Date.now());
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, []);
+
 const RealtimeMonitor = ({ sensorData }) => {
   const {
     oxygen = 0,
@@ -80,9 +90,9 @@ const RealtimeMonitor = ({ sensorData }) => {
     if (!timestamp) return false;
 
     const now = Date.now();
-    const lastUpdate = new Date(timestamp).getTime(); // pastikan timestamp valid
+    const lastUpdate = new Date(timestamp * 1000).getTime(); // pastikan timestamp valid
 
-    return (now - lastUpdate) <= 5000; // 5 detik
+    return (now - lastUpdate) <= 10000; // 5 detik
   };
 
   const online = isOnline();
@@ -90,7 +100,7 @@ const RealtimeMonitor = ({ sensorData }) => {
   return (
     <div className="realtime-monitor">
       <div className="monitor-header">
-        <h2>📡 Real-time Monitoring</h2>
+        <h2>Real-time Monitoring</h2>
           <div className={`live-badge ${online ? 'online' : 'offline'}`}>
             <span className="pulse"></span>
             {online ? 'LIVE' : 'OFFLINE'}
