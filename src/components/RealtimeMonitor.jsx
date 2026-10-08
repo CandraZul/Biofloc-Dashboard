@@ -16,14 +16,16 @@ const RealtimeMonitor = ({ sensorData }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const {
-    oxygen = 0,
-    ph = 0,
-    temperature = 0,
-    turbidity = 0,
-    ammonia = 0,
-    timestamp = 0
-  } = sensorData || {};
+const {
+  oxygen = 0,
+  ph = 0,
+  temperature = 0,
+  turbidity: rawTurbidity = 0,
+  ammonia = 0,
+  timestamp = 0
+} = sensorData || {};
+
+const turbidity = rawTurbidity === 1000 ? 0 : rawTurbidity;
   const parameters = [
     {
       name: 'Dissolved Oxygen (DO)',
