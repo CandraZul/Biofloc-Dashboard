@@ -207,7 +207,9 @@ const Dashboard = ({ historicalData }) => {
               <div className="stat-info">
                 <h3>Turbidity</h3>
                 <div className="stat-values">
-                  <div>Rata-rata: <strong>{stats.turbidity.avg} mg/L</strong></div>
+                  <div>Rata-rata: <strong>
+      {stats.turbidity.avg === 1000 ? 0 : stats.turbidity.avg} mg/L
+    </strong></div>
                   <div>Min: {stats.turbidity.min} | Max: {stats.turbidity.max}</div>
                 </div>
               </div>
